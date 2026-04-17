@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rankhify</title>
+    <title>Rankify</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700;800&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -21,12 +21,12 @@
             background-color: var(--bg);
             color: white;
             font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
             padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Futuristinen animoitu tausta */
@@ -47,181 +47,189 @@
 
         .header-title {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 64px;
+            font-size: 54px;
             font-weight: 800;
-            letter-spacing: 15px;
+            letter-spacing: 12px;
             text-transform: uppercase;
             color: var(--accent);
             text-shadow: 0 0 30px var(--accent-glow);
-            margin-bottom: 50px;
-            text-align: center;
-        }
-
-        .leaderboard-container {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .profile-card {
-            position: relative;
-            width: 100%;
-            padding: 40px;
-            text-align: center;
-            background: var(--glass);
-            backdrop-filter: blur(30px);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease, border-color 0.4s ease;
-        }
-
-        .profile-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
-
-        .rank-crown {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: block;
-            filter: drop-shadow(0 0 15px var(--gold));
-        }
-
-        .player-name {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            background: linear-gradient(to bottom, #fff 40%, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            background: var(--accent);
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 2px;
             margin-bottom: 30px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            text-align: center;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+        /* Hakukenttä alkuperäisestä koodista viritettynä */
+        .search-container {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
         }
 
-        .stat-item {
-            background: rgba(0, 0, 0, 0.3);
+        #searchBox {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 25px;
+            background: var(--glass);
             border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 20px;
+            color: white;
+            border-radius: 25px;
+            outline: none;
+            backdrop-filter: blur(10px);
+            font-family: 'Inter', sans-serif;
             transition: 0.3s;
         }
 
-        .stat-label {
-            display: block;
-            font-size: 9px;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+        #searchBox:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        .stat-value {
+        .leaderboard-container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Vaakasuuntainen pelaajarivi (Horizontal) */
+        .player-row {
+            display: grid;
+            grid-template-columns: 80px 1.5fr 3.5fr;
+            align-items: center;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            padding: 15px 25px;
+            border-radius: 15px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .player-row:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+            background: rgba(112, 0, 255, 0.05);
+        }
+
+        .rank-id {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .rank-1 { color: var(--gold); filter: drop-shadow(0 0 10px var(--gold)); }
+
+        .player-name {
             font-family: 'Rajdhani', sans-serif;
             font-size: 22px;
             font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .ht-text { color: var(--gold); text-shadow: 0 0 10px rgba(255,204,0,0.2); }
-        .lt-text { color: #888; }
-        
-        /* Erikoisasettelu viimeiselle statille jos pariton määrä */
-        .full-width { grid-column: span 2; }
+        .multi-ranks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-end;
+        }
 
+        .tier-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .ht-tag {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .lt-tag {
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .player-row {
+                grid-template-columns: 50px 1fr;
+                gap: 10px;
+            }
+            .multi-ranks {
+                grid-column: 1 / span 2;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1 class="header-title">Rankhify</h1>
+    <h1 class="header-title">Rankify</h1>
 
-    <div class="leaderboard-container" id="leaderboard">
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="🔍 Etsi pelaajia..." onkeyup="updateList()">
+    </div>
+
+    <div class="leaderboard-container" id="list-container">
         </div>
 
     <script>
-        // TÄSTÄ VOIT LISÄTÄ TAI MUOKATA PELAAJIA
+        // DATA - Pidetty alkuperäisenä
         const PLAYERS_DATABASE = [
             {
                 name: "MrKetsuppi",
                 ranks: [
                     { label: "Sword", val: "HT5", type: "ht" },
-                    { label: "Crystal PvP", val: "HT4", type: "ht" },
+                    { label: "Crystal", val: "HT4", type: "ht" },
                     { label: "Axe", val: "HT5", type: "ht" },
                     { label: "UHC", val: "LT5", type: "lt" },
-                    { label: "Mace", val: "LT5", type: "lt", full: true }
+                    { label: "Mace", val: "LT5", type: "lt" }
                 ]
             }
-            // Voit lisätä uuden pelaajan näin:
-            /*
-            ,{
-                name: "Esimerkki",
-                ranks: [
-                    { label: "Sword", val: "HT1", type: "ht" },
-                    { label: "Crystal", val: "LT2", type: "lt" }
-                ]
-            }
-            */
         ];
 
-        function renderLeaderboard() {
-            const container = document.getElementById('leaderboard');
+        const gmIcons = { Sword: "⚔️", Crystal: "🔮", Axe: "🪓", Mace: "🔨", UHC: "🍎" };
+
+        function updateList() {
+            const container = document.getElementById('list-container');
+            const q = document.getElementById('searchBox').value.toLowerCase();
             container.innerHTML = "";
 
-            PLAYERS_DATABASE.forEach((player, index) => {
-                const statsHtml = player.ranks.map(r => `
-                    <div class="stat-item ${r.full ? 'full-width' : ''}">
-                        <span class="stat-label">${r.label}</span>
-                        <div class="stat-value ${r.type === 'ht' ? 'ht-text' : 'lt-text'}">
-                            ${getIcon(r.label)} ${r.val}
-                        </div>
-                    </div>
-                `).join('');
+            const filtered = PLAYERS_DATABASE.filter(p => p.name.toLowerCase().includes(q));
 
-                container.innerHTML += `
-                    <div class="profile-card">
-                        <span class="rank-crown">${index === 0 ? '👑' : '⭐'}</span>
-                        <h2 class="player-name">${player.name}</h2>
-                        <div class="status-badge">${index === 0 ? 'ELITE LEADER' : 'TOP PLAYER'}</div>
-                        <div class="stats-grid">
-                            ${statsHtml}
+            filtered.forEach((p, i) => {
+                const num = i + 1;
+                const rClass = num === 1 ? 'rank-1' : '';
+                const rIcon = num === 1 ? '🏆' : `#${num}`;
+                
+                const ranksHtml = p.ranks.map(r => {
+                    return `
+                        <div class="tier-tag ${r.type === 'ht' ? 'ht-tag' : 'lt-tag'}">
+                            ${gmIcons[r.label] || "🛡️"} ${r.val}
                         </div>
-                    </div>
-                `;
+                    `;
+                }).join('');
+                
+                container.innerHTML += `
+                    <div class="player-row">
+                        <div class="rank-id ${rClass}">${rIcon}</div>
+                        <div class="player-name">${p.name}</div>
+                        <div class="multi-ranks">${ranksHtml}</div>
+                    </div>`;
             });
         }
 
-        function getIcon(label) {
-            const l = label.toLowerCase();
-            if (l.includes("sword")) return "⚔️";
-            if (l.includes("crystal")) return "🔮";
-            if (l.includes("axe")) return "🪓";
-            if (l.includes("uhc")) return "🍎";
-            if (l.includes("mace")) return "🔨";
-            return "🛡️";
-        }
-
-        renderLeaderboard();
+        // Käynnistys
+        updateList();
     </script>
-
 </body>
 </html>
